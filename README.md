@@ -1,5 +1,5 @@
 # wzl-hackathon-2020
-Team 1, Subject "Edge Control"
+Subject "Edge Control"
 
 This repository contains a software project involving the collection and processing of machine data from a robot arm.
 
