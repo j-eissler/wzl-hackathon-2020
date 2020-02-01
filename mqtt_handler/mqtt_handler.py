@@ -77,7 +77,7 @@ def on_message_callback(client, userdata, message):
 
 # Main program
 mqtt_client.on_message = on_message_callback
-mqtt_client.loop_start()        # let client check for new updates automatically
+mqtt_client.loop_start()
 
 running = True
 while running:

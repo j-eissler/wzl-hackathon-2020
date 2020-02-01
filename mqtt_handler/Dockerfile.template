@@ -3,19 +3,13 @@
 # and about balena base images here: https://www.balena.io/docs/reference/base-images/base-images/
 FROM balenalib/%%BALENA_MACHINE_NAME%%-node:10-stretch-run
 
-# use `install_packages` if you need to install dependencies,
-# for instance if you need git, just uncomment the line below.
-# RUN install_packages git
+# Install required packages
 RUN apt update
 RUN apt install mosquitto-clients python3 python3-pip
 RUN pip3 install requests paho-mqtt
 
 # Defines our working directory in container
 WORKDIR /usr/src/app
-
-# This install npm dependencies on the balena build server,
-# making sure to clean up the artifacts it creates in order to reduce the image size.
-#RUN JOBS=MAX npm install --production --unsafe-perm && npm cache verify && rm -rf /tmp/*
 
 # This will copy all files in our root to the working  directory in the container
 COPY . ./
@@ -25,5 +19,3 @@ ENV UDEV=1
 
 # Run script after boot
 CMD ["python3", "./mqtt_handler.py"]
-
-
