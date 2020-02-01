@@ -8,7 +8,6 @@ import time
 import os
 
 
-# Variables
 thingsboard_protocol = str(os.environ['thingsboard_protocol'])
 thingsboard_address = str(os.environ['thingsboard_address'])
 thingsboard_port = str(os.environ['thingsboard_port'])
@@ -19,8 +18,6 @@ mqtt_broker_address = str(os.environ['mqtt_broker_address'])
 mqtt_broker_port = int(os.environ['mqtt_broker_port'])
 mqtt_broker_topic = str(os.environ['mqtt_broker_topic'])
 current_mqtt_message = "empty"
-
-
 
 
 
@@ -67,8 +64,6 @@ def format_raw_input(raw_mqtt_input):
 
 # Callback function for when a new mqtt message is received
 def on_message_callback(client, userdata, message):
-    #print("Received message '" + str(message.payload) + "' on topic '" + message.topic + "' with QoS " + str(message.qos))
-    
     # Read mqtt stream from robot and store it
     global current_mqtt_message
     current_mqtt_message = str(message.payload)
@@ -81,9 +76,10 @@ mqtt_client.loop_start()
 
 running = True
 while running:
-    # Send current mqtt message to ThingsBoard
     print("Subscribed to mqtt broker " + str(mqtt_broker_address) + ":" + str(mqtt_broker_port) + ", T:" + str(mqtt_broker_topic))
     print("Sending mqtt data to ThingsBoard on " + str(thingsboard_address))
+
+    # Send current mqtt message to ThingsBoard
     formatted_mqtt_data = format_raw_input(current_mqtt_message)
     send_to_dashboard(formatted_mqtt_data)
 
