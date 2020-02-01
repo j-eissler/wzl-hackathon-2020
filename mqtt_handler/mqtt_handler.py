@@ -7,6 +7,8 @@ import paho.mqtt.client as mqtt
 import time
 import os
 
+
+# Variables
 thingsboard_protocol = str(os.environ['thingsboard_protocol'])
 thingsboard_address = str(os.environ['thingsboard_address'])
 thingsboard_port = str(os.environ['thingsboard_port'])
@@ -16,7 +18,7 @@ thingsboard_update_interval = int(os.environ['thingsboard_update_interval'])
 mqtt_broker_address = str(os.environ['mqtt_broker_address'])
 mqtt_broker_port = int(os.environ['mqtt_broker_port'])
 mqtt_broker_topic = str(os.environ['mqtt_broker_topic'])
-
+current_mqtt_message = "empty"
 
 
 
@@ -26,7 +28,6 @@ mqtt_broker_topic = str(os.environ['mqtt_broker_topic'])
 mqtt_client = mqtt.Client()
 mqtt_client.connect(mqtt_broker_address, port=mqtt_broker_port)
 mqtt_client.subscribe(mqtt_broker_topic)
-current_mqtt_message = "empty"
 
 # Takes the mqtt message list and sends it to the ThingsBoard dashboard.
 def send_to_dashboard(mqtt_output_list):
